@@ -52,6 +52,16 @@ public class ControladorVideojuego {
 		return new ResponseEntity<List<Videojuego>>(listaJuegos,HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "videojuego/compania/{compania}", 
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<List<Videojuego>> getVideojuegosCompania(
+			@PathVariable("compania") String compania){
+		System.out.println("Listando juegos de la compañia: " + compania);
+		List<Videojuego> lv = daoJuego.listarPorCompania(compania);
+		if (lv != null) {
+			return new ResponseEntity<List<Videojuego>>(lv,HttpStatus.OK);
+		}else return new ResponseEntity<List<Videojuego>>(lv,HttpStatus.NOT_FOUND);
+	}
 	//alta de videojuego
 	
 	@PostMapping(path="videojuego",consumes=MediaType.APPLICATION_JSON_VALUE,
