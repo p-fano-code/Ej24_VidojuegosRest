@@ -16,11 +16,11 @@ public class DaoVideojuego {
 	public DaoVideojuego() {
 		System.out.println("Creando lista de videojuegos");
 		listaJuegos = new ArrayList<Videojuego>();
-		Videojuego v1 = new Videojuego(id++, "GTA V", "Rockstar", 9);
-		Videojuego v2 = new Videojuego(id++, "Biosock", "EA", 6);
-		Videojuego v3 = new Videojuego(id++, "FIFA", "EA", 8);
-		Videojuego v4 = new Videojuego(id++, "NBA", "2k", 10);
-		Videojuego v5 = new Videojuego(id++, "RDR2", "Rockstar", 10);
+		Videojuego v1 = new Videojuego(id++, "GTA V", "Rockstar", 9, 19);
+		Videojuego v2 = new Videojuego(id++, "Biosock", "EA", 6, 32);
+		Videojuego v3 = new Videojuego(id++, "FIFA", "EA", 8, 23);
+		Videojuego v4 = new Videojuego(id++, "NBA", "2k", 10, 41);
+		Videojuego v5 = new Videojuego(id++, "RDR2", "Rockstar", 10, 59);
 		
 		listaJuegos.add(v1);
 		listaJuegos.add(v2);
@@ -93,6 +93,17 @@ public class DaoVideojuego {
 			}
 		}
 		return listaAux;
+	}
+	
+	public List<Integer> listaPrecios(){
+		int total = 0;
+		List<Integer> listaPrecios = new ArrayList<Integer>();
+		for (Videojuego videojuego : listaJuegos) {
+			listaPrecios.add((int) videojuego.getPrecio());
+			total += videojuego.getPrecio();
+		}
+		listaPrecios.add(total);
+		return listaPrecios;
 	}
 	
 }

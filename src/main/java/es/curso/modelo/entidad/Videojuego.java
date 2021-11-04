@@ -6,17 +6,19 @@ public class Videojuego {
 	private String nombre;
 	private String compania;
 	private float notaMedia;
+	private int precio;
 		
 	public Videojuego() {
 		
 	}
 	
-	public Videojuego(int id, String nombre, String compania, double d) {
+	public Videojuego(int id, String nombre, String compania, double d, int precio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.compania = compania;
 		this.notaMedia = (float) d;
+		this.precio = precio;
 	}
 	
 	public int getId() {
@@ -43,11 +45,21 @@ public class Videojuego {
 	public void setNotaMedia(float notaMedia) {
 		this.notaMedia = notaMedia;
 	}
+	
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+
 	@Override
 	public String toString() {
 		return "Videojuego [id=" + id + ", nombre=" + nombre + ", compania=" + compania + ", notaMedia=" + notaMedia
-				+ "]";
+				+ ", precio=" + precio + "]";
 	}
+
 	
 	
 	

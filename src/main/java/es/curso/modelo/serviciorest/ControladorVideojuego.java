@@ -25,7 +25,7 @@ public class ControladorVideojuego {
 	@Autowired
 	private DaoVideojuego daoJuego;
 	
-	@GetMapping(path = "videojuego/{id}", 
+	@GetMapping(path = "videojuegos/{id}", 
 			produces = MediaType.APPLICATION_JSON_VALUE)	
 	public ResponseEntity<Videojuego> getVideojuego(@PathVariable("id") int id){
 		System.out.println("Buscando juego con id: " + id);
@@ -52,7 +52,7 @@ public class ControladorVideojuego {
 		return new ResponseEntity<List<Videojuego>>(listaJuegos,HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "videojuego/compania/{compania}", 
+	@GetMapping(path = "videojuegos/compania/{compania}", 
 			produces = MediaType.APPLICATION_JSON_VALUE)	
 	public ResponseEntity<List<Videojuego>> getVideojuegosCompania(
 			@PathVariable("compania") String compania){
@@ -62,9 +62,19 @@ public class ControladorVideojuego {
 			return new ResponseEntity<List<Videojuego>>(lv,HttpStatus.OK);
 		}else return new ResponseEntity<List<Videojuego>>(lv,HttpStatus.NOT_FOUND);
 	}
+	
+
+	@GetMapping(path = "videojuegos/precios", 
+			produces = MediaType.APPLICATION_JSON_VALUE)	
+	public ResponseEntity<List<Integer>> getPrecios(){		
+		List<Integer> lp = daoJuego.listaPrecios();
+		if (lp != null) {
+			return new ResponseEntity<List<Integer>>(lp,HttpStatus.OK);
+		}else return new ResponseEntity<List<Integer>>(lp,HttpStatus.NOT_FOUND);
+	}
 	//alta de videojuego
 	
-	@PostMapping(path="videojuego",consumes=MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(path="videojuegos",consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Videojuego> altaPersona(@RequestBody Videojuego v) {
 		System.out.println("altaJuego: objeto persona: " + v);
@@ -73,7 +83,7 @@ public class ControladorVideojuego {
 	}
 	
 	//METODO PUT
-	@PutMapping(path="videojuego/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path="videojuegos/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Videojuego> modificarVideojuego(
 			@PathVariable("id") int id, 
 			@RequestBody Videojuego v) {
@@ -88,7 +98,7 @@ public class ControladorVideojuego {
 		}
 	}
 	 //METODO DELETE
-	@DeleteMapping(path="videojuego/{id}")
+	@DeleteMapping(path="videojuegos/{id}")
 	public ResponseEntity<Videojuego> borrarJuego(@PathVariable int id) {
 		System.out.println("ID a borrar: " + id);
 		Videojuego v = daoJuego.borrar(id);
